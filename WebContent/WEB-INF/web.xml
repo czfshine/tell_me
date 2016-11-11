@@ -13,6 +13,5 @@
     <description></description>
     <display-name>login</display-name>
     <servlet-name>login</servlet-name>
-    <jsp-file>/login.jsp</jsp-file>
   </servlet>
 </web-app>

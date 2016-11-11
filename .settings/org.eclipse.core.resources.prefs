@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/login.jsp=UTF-8
-encoding//src/com/czfshine/tellme/login_jsp.java=UTF-8
-encoding//src/com/czfshine/tellme/mange_jsp.java=UTF-8
-encoding//src/com/czfshine/tellme/plane_jsp.java=UTF-8
+encoding//src/com/czfshine/tellme/LoginServlet.java=UTF-8
+encoding//src/com/czfshine/tellme/MangeServlet.java=UTF-8
+encoding//src/com/czfshine/tellme/PlaneServlet.java=UTF-8

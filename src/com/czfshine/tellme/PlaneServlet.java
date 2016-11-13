@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/PlaneServlet")
 public class PlaneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Connection con;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -28,7 +30,26 @@ public class PlaneServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		
+		 try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/PLANE?useUnicode=true&characterEncoding=utf-8", "root", "12345678");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	}
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -107,9 +128,6 @@ public class PlaneServlet extends HttpServlet {
 		out.write("\t\t\t\t\t\t\t");
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/PLANE?useUnicode=true&characterEncoding=utf-8", "root", "12345678");
 			PreparedStatement ps = con.prepareStatement("SELECT count(*)  FROM data WHERE touser=\'" + type + "\';");
 			ResultSet rs = ps.executeQuery();
 			rs.next();
@@ -249,12 +267,9 @@ public class PlaneServlet extends HttpServlet {
 			out.write("\t</div>\r\n");
 			out.write("</body>\r\n");
 			out.write("</html>");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			out.write(e.getMessage());
 		}
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
